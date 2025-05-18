@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Message Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f2f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .status-panel {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .status-panel.connected {
+            background-color: #dcf8c6;
+        }
+        .status-panel.disconnected {
+            background-color: #ffcdd2;
+        }
+        .message-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .message-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .message-item.pending {
+            background-color: #fff3e0;
+        }
+        .message-item.failed {
+            background-color: #ffebee;
+        }
+        .message-item.success {
+            background-color: #e8f5e9;
+        }
+        .settings-panel {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="number"] {
+            width: 100px;
+            padding: 5px;
+        }
+        button {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #128C7E;
+        }
+        .alert {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .alert.error {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        .alert.warning {
+            background-color: #fff3e0;
+            color: #ef6c00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>WhatsApp Message Manager</h1>
+        
+        <div id="statusPanel" class="status-panel">
+            Estado: Verificando...
+        </div>
+
+        <div class="settings-panel">
+            <h2>Configuración</h2>
+            <div class="form-group">
+                <label for="wordsPerMinute">Palabras por minuto:</label>
+                <input type="number" id="wordsPerMinute" value="60" min="1" max="300">
+            </div>
+            <div class="form-group">
+                <label for="delayBetweenMessages">Retraso entre mensajes (segundos):</label>
+                <input type="number" id="delayBetweenMessages" value="2" min="0" max="60">
+            </div>
+        </div>
+
+        <div class="message-controls">
+            <h2>Nuevo Mensaje</h2>
+            <div class="form-group">
+                <label for="phoneNumber">Número de teléfono:</label>
+                <input type="text" id="phoneNumber" placeholder="Ej: 34612345678">
+            </div>
+            <div class="form-group">
+                <label for="messageText">Mensaje:</label>
+                <textarea id="messageText" rows="4" style="width: 100%;"></textarea>
+            </div>
+            <button id="addMessage">Agregar a la cola</button>
+        </div>
+
+        <div class="message-list">
+            <h2>Cola de Mensajes</h2>
+            <div id="messageQueue"></div>
+        </div>
+
+        <div class="controls">
+            <button id="startSending">Iniciar Envío</button>
+            <button id="pauseSending">Pausar</button>
+            <button id="clearQueue">Limpiar Cola</button>
+        </div>
+    </div>
+    <script src="message-manager.js"></script>
+</body>
+</html> 
